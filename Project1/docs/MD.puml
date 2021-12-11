@@ -1,0 +1,48 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide methods
+'skinparam linetype polyline
+left to right direction
+
+
+
+class ReadData {
+}
+
+class CountriesData {
+    - Map<Country, ArrayList<DayData>> map;
+    - int numberOfCountries;
+}
+
+class Country {
+     - String SIGLA
+     - String Continent
+     - String CountryName
+     - double population
+     - double agedOlder65
+     - double cardiovasc_death_rate
+     - double diabetes_prevalence
+     - double female_smokers
+     - double male_smokers
+     - double hospital_beds_per_thousand
+     - double life_expectancy
+}
+
+class DayData {
+     - LocalDate dia
+     - int totalCases
+     - int newCases
+     - int totalDeaths
+     - int newDeaths
+     - int newTests
+     - int totalTests
+}
+
+Country "1" -- "1..*" DayData : has >
+
+CountriesData "1" -- "1..*" Country : has >
+
+ReadData "1" - "1" CountriesData : populates >
+
+@enduml
+
